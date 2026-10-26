@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="청소년을 위한 권리와 사회복지 정보 안내 사이트">
+  <title>권리와 복지 | Rights & Welfare</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: Arial, "Noto Sans KR", sans-serif;
+      background: #f7f8fc;
+      color: #202b3c;
+      line-height: 1.7;
+    }
+    header {
+      background: #fff;
+      padding: 18px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #e8eaf0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .logo {
+      color: #3157c8;
+      font-size: 21px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+    nav {
+      display: flex;
+      gap: 22px;
+    }
+    nav a {
+      color: #485268;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    nav a:hover {
+      color: #3157c8;
+    }
+    .hero {
+      padding: 90px 8%;
+      background: linear-gradient(135deg, #eaf0ff, #f5f2ff);
+      text-align: center;
+    }
+    .tag {
+      display: inline-block;
+      color: #3157c8;
+      background: #fff;
+      border-radius: 30px;
+      padding: 6px 15px;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 52px);
+      line-height: 1.3;
+      margin-bottom: 20px;
+      letter-spacing: -1.5px;
+    }
+    .hero h1 span {
+      color: #3157c8;
+    }
+    .hero p {
+      max-width: 620px;
+      margin: 0 auto 28px;
+      color: #59647a;
+    }
+    .button {
+      display: inline-block;
+      background: #3157c8;
+      color: white;
+      text-decoration: none;
+      padding: 12px 23px;
+      border-radius: 10px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .button:hover {
+      background: #2445a8;
+    }
+    section {
+      padding: 65px 8%;
+    }
+    .section-title {
+      margin-bottom: 10px;
+      font-size: 29px;
+      letter-spacing: -0.8px;
+    }
+    .section-desc {
+      color: #6b7487;
+      margin-bottom: 28px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+    }
+    .card {
+      background: white;
+      border: 1px solid #e9ebf2;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 5px 18px rgba(31, 47, 84, 0.04);
+    }
+    .card h3 {
+      margin: 10px 0;
+      font-size: 18px;
+    }
+    .card p {
+      color: #687286;
+      font-size: 14px;
+    }
+    .icon {
+      font-size: 28px;
+    }
+    .card a {
+      display: inline-block;
+      margin-top: 15px;
+      color: #3157c8;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .scenario {
+      background: #fff;
+    }
+    .scenario-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .scenario-buttons button,
+    .filter-buttons button {
+      padding: 10px 16px;
+      border: 1px solid #dce1ec;
+      border-radius: 9px;
+      background: white;
+      color: #37445d;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .scenario-buttons button:hover,
+    .filter-buttons button:hover,
+    .filter-buttons button.active {
+      background: #3157c8;
+      color: white;
+      border-color: #3157c8;
+    }
+    #scenario-result {
+      background: #f1f4ff;
+      border-radius: 14px;
+      padding: 23px;
+      min-height: 130px;
+    }
+    #scenario-result h3 {
+      margin-bottom: 8px;
+    }
+    #scenario-result p {
+      color: #4c5870;
+      margin-bottom: 10px;
+    }
+    .filter-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-bottom: 22px;
+    }
+    .program-card {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .category {
+      background: #edf1ff;
+      color: #3157c8;
+      border-radius: 6px;
+      padding: 3px 9px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .program-card .save {
+      margin-top: auto;
+      padding-top: 16px;
+      color: #3157c8;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    .notice {
+      color: #7b5b18;
+      background: #fff8e8;
+      border: 1px solid #f4e4bb;
+      border-radius: 10px;
+      padding: 14px;
+      font-size: 13px;
+      margin-top: 22px;
+    }
+    .help {
+      background: #eef2fa;
+    }
+    .help .card {
+      box-shadow: none;
+    }
+    .help-number {
+      font-size: 24px;
+      font-weight: 800;
+      color: #3157c8;
+      margin: 8px 0;
+    }
+    footer {
+      padding: 30px 8%;
+      background: #202b3c;
+      color: #d5dbea;
+      font-size: 13px;
+      text-align: center;
+    }
+    footer p + p {
+      margin-top: 6px;
+    }
+    @media (max-width: 650px) {
+      header {
+        padding: 15px 5%;
+        flex-direction: column;
+        gap: 12px;
+      }
+      nav {
+        gap: 14px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      nav a {
+        font-size: 12px;
+      }
+      .hero {
+        padding: 65px 6%;
+      }
+      section {
+        padding: 48px 6%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="logo" href="#">권리와 복지.</a>
+    <nav>
+      <a href="#rights">권리 안내</a>
+      <a href="#welfare">복지 정보</a>
+      <a href="#help">도움 기관</a>
+    </nav>
+  </header>
+  <main>
+    <section class="hero">
+      <span class="tag">RIGHTS & WELFARE</span>
+      <h1>나의 권리를 알고,<br><span>필요한 도움을 찾다.</span></h1>
+      <p>
+        법과 사회복지 정보는 특별한 사람만을 위한 것이 아닙니다.
+        일상에서 마주하는 문제를 이해하고, 나에게 필요한 권리와 지원을 찾아보세요.
+      </p>
+      <a class="button" href="#rights">나의 권리 알아보기 →</a>
+    </section>
+    <section id="rights" class="scenario">
+      <h2 class="section-title">일상 속 권리 안내</h2>
+      <p class="section-desc">
+        상황을 선택하면 관련 권리와 도움받을 방법을 확인할 수 있습니다.
+      </p>
+      <div class="scenario-buttons">
+        <button onclick="showScenario('work')">💼 아르바이트</button>
+        <button onclick="showScenario('privacy')">🔒 개인정보</button>
+        <button onclick="showScenario('school')">🏫 학교생활</button>
+        <button onclick="showScenario('living')">🏠 생활 어려움</button>
+      </div>
+      <div id="scenario-result" aria-live="polite">
+        <h3>어떤 상황이 궁금한가요?</h3>
+        <p>위의 항목을 선택해 관련 정보와 확인할 사항을 알아보세요.</p>
+      </div>
+    </section>
+    <section id="welfare">
+      <h2 class="section-title">복지 정보 찾기</h2>
+      <p class="section-desc">
+        관심 분야를 선택해 관련 공공기관의 정보를 확인하세요.
+      </p>
+      <div class="filter-buttons">
+        <button class="active" onclick="filterPrograms('all', this)">전체</button>
+        <button onclick="filterPrograms('youth', this)">청소년·청년</button>
+        <button onclick="filterPrograms('education', this)">교육</button>
+        <button onclick="filterPrograms('housing', this)">주거</button>
+        <button onclick="filterPrograms('living', this)">생활 지원</button>
+      </div>
+      <div class="grid" id="program-list"></div>
+      <p class="notice">
+        안내: 이 사이트는 복지제도 탐색을 돕기 위한 정보 페이지입니다.
+        실제 지원 대상, 신청 기간 및 조건은 각 공식 기관의 최신 안내를 확인하세요.
+      </p>
+    </section>
+    <section id="help" class="help">
+      <h2 class="section-title">도움이 필요할 때</h2>
+      <p class="section-desc">
+        상황에 맞는 공공기관과 공식 사이트에서 자세한 도움을 확인할 수 있습니다.
+      </p>
+      <div class="grid">
+        <article class="card">
+          <div class="icon">🧑‍🤝‍🧑</div>
+          <h3>청소년상담 1388</h3>
+          <p>청소년의 고민과 어려움에 대한 상담 및 지원 안내</p>
+          <p class="help-number">1388</p>
+          <a href="https://www.1388.go.kr/" target="_blank" rel="noopener noreferrer">공식 사이트 →</a>
+        </article>
+        <article class="card">
+          <div class="icon">⚖️</div>
+          <h3>대한법률구조공단</h3>
+          <p>법률 상담과 법률구조 제도 관련 정보</p>
+          <a href="https://www.klac.or.kr/" target="_blank" rel="noopener noreferrer">공식 사이트 →</a>
+        </article>
+        <article class="card">
+          <div class="icon">🏛️</div>
+          <h3>복지로</h3>
+          <p>복지서비스 검색 및 복지 관련 정보 확인</p>
+          <a href="https://www.bokjiro.go.kr/" target="_blank" rel="noopener noreferrer">공식 사이트 →</a>
+        </article>
+        <article class="card">
+          <div class="icon">📋</div>
+          <h3>고용노동부</h3>
+          <p>근로기준, 노동 권리 및 고용 관련 정보</p>
+          <a href="https://www.moel.go.kr/" target="_blank" rel="noopener noreferrer">공식 사이트 →</a>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <p><strong>권리와 복지 | Rights & Welfare</strong></p>
+    <p>법과 사회복지 정보를 통해 더 나은 사회를 생각합니다.</p>
+    <p>본 사이트는 교육 및 정보 제공 목적으로 제작되었습니다.</p>
+  </footer>
+  <script>
+    const scenarios = {
+      work: {
+        title: "💼 아르바이트 중 부당한 대우를 받았다면",
+        text: "근로계약서 작성 여부, 임금 지급 내역, 근로시간 등 사실관계를 확인하세요. 임금이나 근로조건에 문제가 있다면 고용노동부의 공식 안내를 확인할 수 있습니다.",
+        link: "https://www.moel.go.kr/",
+        label: "고용노동부에서 확인하기"
+      },
+      privacy: {
+        title: "🔒 개인정보가 동의 없이 공개되었다면",
+        text: "어떤 정보가 어디에 공개되었는지 확인하고, 게시물 삭제 요청이나 개인정보 침해 상담을 고려하세요. 구체적인 대응은 사안에 따라 달라질 수 있습니다.",
+        link: "https://www.privacy.go.kr/",
+        label: "개인정보 포털 방문하기"
+      },
+      school: {
+        title: "🏫 학교생활에서 권리 침해를 겪었다면",
+        text: "상황을 기록하고 믿을 수 있는 교사나 보호자에게 도움을 요청하세요. 학교폭력 등 구체적인 문제는 학교의 담당 절차와 공식 상담 창구를 통해 확인할 수 있습니다.",
+        link: "https://www.1388.go.kr/",
+        label: "청소년상담 1388 확인하기"
+      },
+      living: {
+        title: "🏠 생활비나 주거 문제로 어려움을 겪는다면",
+        text: "가구 상황과 거주 지역에 따라 이용할 수 있는 복지서비스가 다릅니다. 복지로에서 지원제도를 검색하거나 가까운 행정복지센터에 문의해 보세요.",
+        link: "https://www.bokjiro.go.kr/",
+        label: "복지서비스 검색하기"
+      }
+    };
+    function showScenario(key) {
+      const item = scenarios[key];
+      document.getElementById("scenario-result").innerHTML = `
+        <h3>${item.title}</h3>
+        <p>${item.text}</p>
+        <a class="button" href="${item.link}" target="_blank"
+           rel="noopener noreferrer">${item.label} →</a>
+      `;
+    }
+    const programs = [
+      {
+        category: "youth",
+        name: "청소년 지원 정보",
+        description: "청소년 상담, 활동 및 다양한 지원 정보를 확인합니다.",
+        url: "https://www.1388.go.kr/",
+        tag: "청소년·청년"
+      },
+      {
+        category: "education",
+        name: "교육비·교육 지원 정보",
+        description: "교육 관련 복지서비스와 지원 제도를 검색합니다.",
+        url: "https://www.bokjiro.go.kr/",
+        tag: "교육"
+      },
+      {
+        category: "housing",
+        name: "주거 지원 정보",
+        description: "주거와 관련된 공공 지원서비스를 확인합니다.",
+        url: "https://www.bokjiro.go.kr/",
+        tag: "주거"
+      },
+      {
+        category: "living",
+        name: "생활 지원 복지서비스",
+        description: "생활 여건에 맞는 복지서비스와 신청 정보를 검색합니다.",
+        url: "https://www.bokjiro.go.kr/",
+        tag: "생활 지원"
+      },
+      {
+        category: "youth",
+        name: "청년 정책 정보",
+        description: "청년 대상 정책과 지역별 지원 정보를 찾아봅니다.",
+        url: "https://www.youthcenter.go.kr/",
+        tag: "청소년·청년"
+      },
+      {
+        category: "education",
+        name: "교육 관련 공공서비스",
+        description: "교육 관련 제도와 공식 안내 자료를 확인합니다.",
+        url: "https://www.gov.kr/",
+        tag: "교육"
+      }
+    ];
+    function filterPrograms(category, button) {
+      document.querySelectorAll(".filter-buttons button").forEach(btn => {
+        btn.classList.remove("active");
+      });
+      button.classList.add("active");
+      const filtered = category === "all"
+        ? programs
+        : programs.filter(item => item.category === category);
+      renderPrograms(filtered);
+    }
+    function renderPrograms(items) {
+      const list = document.getElementById("program-list");
+      list.innerHTML = items.map(item => `
+        <article class="card program-card">
+          <span class="category">${item.tag}</span>
+          <h3>${item.name}</h3>
+          <p>${item.description}</p>
+          <a href="${item.url}" target="_blank" rel="noopener noreferrer">
+            공식 정보 확인하기 →
+          </a>
+        </article>
+      `).join("");
+    }
+    renderPrograms(programs);
+  </script>
+</body>
+</html>
